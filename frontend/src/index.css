@@ -1,0 +1,166 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background: #f1f5f9;
+  color: #1e293b;
+}
+
+main { padding: 24px 16px; }
+
+/* ---------- Navbar ---------- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  background: #0f766e;
+  color: white;
+}
+.brand { color: white; font-weight: 700; font-size: 1.15rem; text-decoration: none; }
+.nav-right { display: flex; gap: 12px; align-items: center; }
+.role { font-size: 0.75rem; padding: 2px 8px; border-radius: 999px; margin-left: 6px; text-transform: uppercase; }
+.role-admin { background: #fde68a; color: #78350f; }
+.role-tourist { background: #bae6fd; color: #0c4a6e; }
+
+/* ---------- Cards and forms ---------- */
+.card {
+  max-width: 760px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 10px;
+  padding: 24px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+.card.narrow { max-width: 400px; }
+.card.wide { max-width: 1100px; overflow-x: auto; }
+
+label { display: flex; flex-direction: column; gap: 4px; font-size: 0.9rem; margin-bottom: 12px; }
+input { padding: 8px 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.95rem; }
+
+.grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 16px; }
+.grid .full { grid-column: 1 / -1; }
+@media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+
+button {
+  padding: 9px 16px;
+  border: none;
+  border-radius: 6px;
+  background: #0f766e;
+  color: white;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+button:disabled { opacity: 0.6; cursor: wait; }
+.btn-secondary { background: white; color: #0f766e; }
+
+.error { color: #b91c1c; background: #fee2e2; padding: 8px 10px; border-radius: 6px; }
+.hint { color: #64748b; font-size: 0.85rem; }
+.center { text-align: center; }
+.mono { font-family: Consolas, monospace; font-size: 0.8rem; word-break: break-all; }
+
+.btn-danger { background: #dc2626; }
+
+/* ---------- Page layouts (Stage 2) ---------- */
+.page { max-width: 1200px; margin: 0 auto; }
+.page-header { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+.page-header h2 { margin: 0; }
+
+/* Tourist page: map on the left, info cards on the right */
+.dashboard { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; max-width: 1200px; margin: 0 auto; }
+.dashboard .card { max-width: none; margin: 0 0 16px; }
+.dashboard h3 { margin-top: 0; }
+@media (max-width: 900px) { .dashboard { grid-template-columns: 1fr; } }
+
+.badge { font-size: 0.75rem; padding: 3px 10px; border-radius: 999px; font-weight: 600; }
+.badge-ok { background: #dcfce7; color: #166534; }
+.badge-off { background: #e2e8f0; color: #475569; }
+
+/* ---------- Stage 3: navigation, zones, alerts ---------- */
+.nav-links { display: flex; gap: 4px; margin-right: auto; margin-left: 24px; }
+.nav-links a { color: #ccfbf1; text-decoration: none; padding: 6px 12px; border-radius: 6px; }
+.nav-links a.active { background: rgba(255, 255, 255, 0.18); color: white; }
+
+select { padding: 7px 8px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.9rem; background: white; }
+.row { display: flex; gap: 8px; }
+.btn-small { padding: 5px 10px; font-size: 0.8rem; }
+
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; vertical-align: middle; }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 0.8rem; color: #475569; margin-top: 8px; }
+
+.zone-row { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px solid #e2e8f0; }
+.zone-name { flex: 1; font-size: 0.9rem; }
+
+.zone-big { font-size: 1.6rem; font-weight: 700; margin: 0 0 6px; }
+
+.alerts-panel { max-height: 560px; overflow-y: auto; }
+.alert-item { border-left: 4px solid; padding: 6px 10px; margin-bottom: 8px; background: #f8fafc; border-radius: 4px; font-size: 0.85rem; }
+.alert-high { border-color: #dc2626; }
+.alert-medium { border-color: #f59e0b; }
+
+/* Pop-up toasts, above the Leaflet map (which uses z-index up to 1000) */
+.toasts { position: fixed; top: 70px; right: 16px; z-index: 2000; display: flex; flex-direction: column; gap: 8px; width: 320px; max-width: calc(100vw - 32px); }
+.toast { padding: 12px 14px; border-radius: 8px; color: white; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); cursor: pointer; font-size: 0.9rem; }
+.toast-high { background: #dc2626; }
+.toast-medium { background: #d97706; }
+.toast-critical { background: #7f1d1d; border: 3px solid #fca5a5; font-size: 1rem; }
+.toast-info { background: #1d4ed8; }
+.alert-critical { border-color: #7f1d1d; background: #fee2e2; }
+
+/* ---------- Stage 4: SOS and incidents ---------- */
+.sos-card input { width: 100%; margin-bottom: 10px; }
+.sos-button {
+  width: 100%;
+  padding: 18px;
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  background: #dc2626;
+  border-radius: 12px;
+  box-shadow: 0 4px 0 #7f1d1d;
+}
+.sos-button:active { transform: translateY(2px); box-shadow: 0 2px 0 #7f1d1d; }
+
+.badge-sos { background: #dc2626; color: white; text-decoration: none; }
+
+.tabs { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 12px; }
+.tab { background: #e2e8f0; color: #334155; padding: 5px 10px; font-size: 0.8rem; }
+.tab.active { background: #0f766e; color: white; }
+
+.incidents-panel { max-height: 640px; overflow-y: auto; }
+.incident { border-left: 5px solid; background: #f8fafc; border-radius: 6px; padding: 10px 12px; margin-bottom: 10px; cursor: pointer; font-size: 0.9rem; }
+.incident.selected { background: white; box-shadow: 0 0 0 2px #0f766e; cursor: default; }
+.incident-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.incident-msg { margin: 6px 0; font-style: italic; }
+.incident h4 { margin: 10px 0 4px; }
+.history { margin: 0; padding-left: 18px; font-size: 0.82rem; color: #475569; }
+.actions { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
+
+/* ---------- Stage 5: Digital ID, verification, integrity ---------- */
+.btn-outline { background: white; color: #0f766e; border: 1px solid #0f766e; }
+.badge-bad { background: #fee2e2; color: #991b1b; }
+
+.qr-box { text-align: center; margin: 12px 0 4px; }
+.qr-box img { border: 1px solid #e2e8f0; border-radius: 8px; padding: 6px; background: white; }
+
+.verdict { font-size: 1.4rem; font-weight: 800; padding: 8px 12px; border-radius: 8px; margin: 10px 0; text-align: center; letter-spacing: 1px; }
+.verdict-ok { background: #dcfce7; color: #166534; }
+.verdict-bad { background: #fee2e2; color: #991b1b; }
+
+.checks { list-style: none; padding: 0; margin: 0 0 8px; font-size: 0.88rem; }
+.checks li { display: flex; gap: 8px; padding: 5px 0; border-bottom: 1px solid #f1f5f9; }
+.check-icon { font-weight: 700; width: 16px; }
+.check-ok .check-icon { color: #16a34a; }
+.check-bad .check-icon { color: #dc2626; }
+.check-detail { color: #64748b; font-size: 0.78rem; word-break: break-all; }
+
+.integrity { margin-top: 12px; padding-top: 10px; border-top: 1px dashed #cbd5e1; display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+#qr-reader { border-radius: 8px; overflow: hidden; }
+
+/* ---------- Tables ---------- */
+table { border-collapse: collapse; width: 100%; }
+.details th { text-align: left; width: 180px; color: #475569; }
+.details th, .details td { padding: 8px 4px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+.list th, .list td { padding: 8px 10px; border-bottom: 1px solid #e2e8f0; text-align: left; font-size: 0.9rem; }
+.list thead { background: #f8fafc; }

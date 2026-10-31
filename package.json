@@ -1,0 +1,18 @@
+{
+  "name": "tourist-safety",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Smart Tourist Safety Monitoring & Incident Response System (MCA mini project)",
+  "scripts": {
+    "install-all": "npm install && npm install --prefix backend && npm install --prefix frontend && npm install --prefix blockchain",
+    "chain": "npm run node --prefix blockchain",
+    "chain:deploy": "npm run deploy --prefix blockchain",
+    "chain:sync": "npm run sync --prefix backend",
+    "seed": "npm run seed --prefix backend",
+    "simulate": "node simulator/simulator.js",
+    "dev": "concurrently -n backend,frontend -c blue,green \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\""
+  },
+  "devDependencies": {
+    "concurrently": "10.0.6"
+  }
+}

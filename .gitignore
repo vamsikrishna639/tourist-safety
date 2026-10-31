@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.env
+*.log
+
+# Hardhat (Stage 5)
+blockchain/artifacts/
+blockchain/cache/
+blockchain/deployment.json
